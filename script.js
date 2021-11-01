@@ -1,6 +1,9 @@
 // List of valid moves.
 const moves = ['ROCK', 'PAPER', 'SCISSORS'];
 
+
+
+
 // Returns random move from [moves].
 const getComputerMove = () => moves[Math.floor(Math.random()*3)]
 
@@ -17,15 +20,14 @@ function playRound(playerMove, compMove) {
 
     let message = `${player} vs. ${computer}...`
 
-    let versus = (move) => computer == move ? `${message} Computer Wins!` : `${message} You win!`
+    let versus = (move) => computer == move ? `${message} Computer Wins!` : `${message} You win!`;
     
-    if (player == computer) return `${message} It's a tie!`
+    if (player == computer) return `${message} It's a tie!`;
 
     switch(player) {
 
         case 'ROCK':
             return versus('PAPER');
-
             break;
         case 'PAPER':
             return versus('SCISSORS');
@@ -51,12 +53,27 @@ function game(rounds) {
 
         while(!isValid(you)) { you = prompt('I said ROCK, PAPER, or SCISSORS?'); }
 
-        console.log(you)
+        console.log(you);
 
         let comp = getComputerMove();
 
-        alert(playRound(you,comp))    
+        let result = playRound(you,comp);
+        
+        if (result.includes('You')) {
+            playScore++;
+        }
+        else if (result.includes('Computer')) {
+            compScore++;
+        }
+            
+
+        alert(`${result}\n\nYou: ${playScore}\nCPU: ${compScore}`)
     }
+
+    alert(
+        playScore == compScore ? 'The game tied! Nobody wins.' : 
+        playScore > compScore ? 'You win the game!' : 'Computer wins the game!'
+    )
 }
 
 game(5)
