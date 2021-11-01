@@ -18,7 +18,8 @@ function playRound(playerMove, compMove) {
 
     let message = `${player} vs. ${computer}...`
 
-    let versus = (move) => { computer == move ? `${message} Computer Wins!` : `${message} You win!` }
+    let versus = (move) => 
+        { computer == move ? `${message} Computer Wins!` : `${message} You win!` }
     
 
     if (player == computer) return `${message} It's a tie!`
