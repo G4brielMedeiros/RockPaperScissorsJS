@@ -1,24 +1,25 @@
-console.log('hey')
+// List of valid moves.
 const moves = ['ROCK', 'PAPER', 'SCISSORS'];
 
-function getComputerMove() {
-    // Randomly return Rock/Paper/Scissors
-    let random = Math.floor(Math.random()*3)
-    return moves[random];
-}
+// Returns random move from moves.
+const getComputerMove = () => { moves[Math.floor(Math.random()*3)] }
 
-function playRound(playerSel, computerSel) {
-    // Compares player's moves
-    // Returns a string declaring the winner "You Lose! Paper beats Rock"
-    // Parameter must be case insensitive. 
+// Checks if a move is valid.
+const isValid = move =>     { return moves.includes(move.toUpperCase()) }
 
-    let player = playerSel.toUpperCase();
-    let computer = computerSel.toUpperCase();
+
+// Compares player's moves,
+// returns a string declaring the winner.
+function playRound(playerMove, compMove) {
+
+
+    let player = playerMove.toUpperCase();
+    let computer = compMove.toUpperCase();
+
     let message = `${player} vs. ${computer}...`
 
-    function versus(move) {
-        return computer == move ? `${message} Computer Wins!` : `${message} You win!`
-    }
+    let versus = (move) => { computer == move ? `${message} Computer Wins!` : `${message} You win!` }
+    
 
     if (player == computer) return `${message} It's a tie!`
 
@@ -36,10 +37,6 @@ function playRound(playerSel, computerSel) {
     }
 }
 
-function isValid(move) {
-    let m = move.toUpperCase();
-    return m == 'ROCK' || m == 'PAPER' || m == 'SCISSORS' 
-}
 
 function game(rounds) {
     // Play 5 rounds of the game.
@@ -65,12 +62,6 @@ function game(rounds) {
     }
 }
 
-    // Output with Console.log()
-    // Input with prompt()
 
-
-
-
-//TESTS
 game(1)
 
