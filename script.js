@@ -1,72 +1,64 @@
 // List of valid moves.
-const moves = ["ROCK", "PAPER", "SCISSORS"];
+const moves = ["Rock", "Paper", "Scissors"];
+const caps = { rock: "Rock", paper: "Paper", scissors: "Scissors" };
+const beats = { Rock: "Paper", Paper: "Scissors", Scissors: "Rock" };
+
+// Validates a user's input.
+const validate = (move) => caps[move.toLowerCase().trim()]
 
 // Returns random move from [moves].
 const getComputerMove = () => moves[Math.floor(Math.random() * 3)];
 
-// Checks if a move is in [moves].
-const isValid = (move) => moves.includes(move.toUpperCase());
+// Returns a validated move from the user.
+function getHumanMove() {
+    let humamMove = validate(prompt("Rock, Paper, or Scissors?"));
 
-// Compares player's moves,
+    while (!moves.includes(humamMove)) {
+        humamMove = validate(prompt("I said ROCK, PAPER, or SCISSORS!?"));
+    }
+
+    return humamMove;
+}
+
+// Compares player moves,
 // returns a string declaring the winner.
-function playRound(playerMove, compMove) {
-  let player = playerMove.toUpperCase();
-  let computer = compMove.toUpperCase();
+function playRound(human, computer) {
+    let message = `${human} vs. ${computer}...`;
 
-  let message = `${player} vs. ${computer}...`;
-
-  let versus = (move) =>
-    computer == move ? `${message} Computer Wins!` : `${message} You win!`;
-
-  if (player == computer) return `${message} It's a tie!`;
-
-  switch (player) {
-    case "ROCK":
-      return versus("PAPER");
-      break;
-    case "PAPER":
-      return versus("SCISSORS");
-      break;
-    case "SCISSORS":
-      return versus("ROCK");
-      break;
-  }
+    return  human == computer ? `${message} It's a tie, reset round!`
+            : human == beats[computer] ? `${message} You win!`
+            : `${message} Computer Wins!`;
 }
 
 // Plays the game [rounds] times.
 // Keeps score and reports a winner at the end.
 function game(rounds) {
-  let playScore = 0;
-  let compScore = 0;
+    let humanScore = 0;
+    let compScore = 0;
 
-  for (i = 0; i < rounds; i++) {
-    let you = "";
-    you = prompt("Rock, Paper, or Scissors?");
+    for (let round = 0; round < rounds; round++) {
 
-    while (!isValid(you)) {
-      you = prompt("I said ROCK, PAPER, or SCISSORS?");
+        let humamMove = getHumanMove();
+        let compMove = getComputerMove();
+        let result = playRound(humamMove, compMove);
+
+        result.includes("You") ? humanScore++
+        : result.includes("Computer") ? compScore++
+        : round--;
+
+        alert(
+            `${result}
+            
+            You: ${humanScore}
+            CPU: ${compScore}`
+        );
     }
 
-    let comp = getComputerMove();
-
-    let result = playRound(you, comp);
-
-    if (result.includes("You")) {
-      playScore++;
-    } else if (result.includes("Computer")) {
-      compScore++;
-    }
-
-    alert( `${result}\n\nYou: ${playScore}\nCPU: ${compScore}` );
-  }
-
-  alert(
-    playScore == compScore
-      ? "The game tied! Nobody wins."
-      : playScore > compScore
-      ? "You win the game!"
-      : "Computer wins the game!"
-  );
+    alert(
+        humanScore == compScore ? "The game tied! Nobody wins."
+        : humanScore > compScore ? "You win the game!"
+        : "Computer wins the game!"
+    );
 }
 
 game(5);
