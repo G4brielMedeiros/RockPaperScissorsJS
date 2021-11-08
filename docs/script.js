@@ -11,23 +11,24 @@ const validateInput = (move) => caps[move.toLowerCase().trim()]
 const getComputerMove = () => moves[Math.floor(Math.random() * 3)];
 
 const getHumanMove = () => {
-    let humamMove = validateInput(prompt("Rock, Paper, or Scissors?"));
+    let humanMove = validateInput(prompt("Rock, Paper, or Scissors?"));
 
-    while (!moves.includes(humamMove)) {
-        humamMove = validateInput(prompt("I said ROCK, PAPER, or SCISSORS!?"));
+    while (!moves.includes(humanMove)) {
+        humanMove = validateInput(prompt("I said ROCK, PAPER, or SCISSORS!?"));
     }
 
-    return humamMove;
+    return humanMove;
 }
 
 
 // Compares Human vs. Computer and returns a string declaring the round winner.
 function playRound(human, computer) {
     let message = `${human} vs. ${computer}...`;
-
-    return  human == computer ? `${message} It's a tie, reset round!`
+    console.log({human, computer});
+    return  human == computer ? `${message} It's a tie!`
             : human == beats[computer] ? `${message} You win!`
-            : `${message} Computer Wins!`;
+            : computer == beats[human] ? `${message} Computer Wins!`
+            : `what?`
 }
 
 
@@ -61,4 +62,29 @@ function game(rounds) {
     );
 }
 
-game(5);
+// DOM EDITION
+
+
+const buttonMoves = document.querySelectorAll('button.move');
+
+buttonMoves.forEach((move) => {
+    move.addEventListener('click', () => {
+
+        documentResult = document.querySelector('#result')
+        result = playRound(move.textContent, getComputerMove())
+        
+        documentResult.textContent = result;
+        
+
+        
+        console.log('Human chose: ' + move.textContent);
+    })
+})
+
+
+
+
+// game(5);
+
+
+
