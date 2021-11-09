@@ -1,90 +1,46 @@
-
 const moves = ["Rock", "Paper", "Scissors"];
 
 const caps = { rock: "Rock", paper: "Paper", scissors: "Scissors" };
 
 const beats = { Rock: "Paper", Paper: "Scissors", Scissors: "Rock" };
 
+let human = 0;
+let compu = 0;
 
-const validateInput = (move) => caps[move.toLowerCase().trim()]
+let moveList    = document.querySelectorAll("button.move");
+let ContentDOM  = document.querySelector(".content");
+let ResultDOM   = document.querySelector("#result");
+let ScoreDOM    = document.querySelector("#score");
+let WinnerDOM   = document.createElement("p");
+let rematchDOM  = document.createElement("button");
 
-const getComputerMove = () => moves[Math.floor(Math.random() * 3)];
+function getComputerMove() { return moves[Math.floor(Math.random() * 3)]; }
 
-const getHumanMove = () => {
-    let humanMove = validateInput(prompt("Rock, Paper, or Scissors?"));
+function playRound(human, compu) {
+  let message = `${human} vs. ${compu}...`;
 
-    while (!moves.includes(humanMove)) {
-        humanMove = validateInput(prompt("I said ROCK, PAPER, or SCISSORS!?"));
-    }
-
-    return humanMove;
+  if (human == compu) return `${message} It's a tie!`;
+  if (human == beats[compu]) return `${message} You win!`;
+  if (compu == beats[human]) return `${message} Computer Wins!`;
+  return "what?";
 }
 
-
-// Compares Human vs. Computer and returns a string declaring the round winner.
-function playRound(human, computer) {
-    let message = `${human} vs. ${computer}...`;
-    console.log({human, computer});
-    return  human == computer ? `${message} It's a tie!`
-            : human == beats[computer] ? `${message} You win!`
-            : computer == beats[human] ? `${message} Computer Wins!`
-            : `what?`
+function announceWinner(winner) {
+  WinnerDOM.textContent = `${winner} wins!!!`;
+  ContentDOM.replaceChildren(WinnerDOM);
 }
 
+moveList.forEach((move) => {
+  move.addEventListener("click", () => {
+    const result = playRound(move.textContent, getComputerMove());
 
-// Plays rounds, keeps score, and reports a game winner.
-function game(rounds) {
-    let humanScore = 0;
-    let compScore = 0;
+    if (result.includes("You")) human++;
+    if (result.includes("Computer")) compu++;
 
-    for (let round = 0; round < rounds; round++) {
+    ResultDOM.textContent = result;
+    ScoreDOM.textContent = `Human ${human} x ${compu} Computer`;
 
-        let humamMove = getHumanMove();
-        let compMove = getComputerMove();
-        let result = playRound(humamMove, compMove);
-
-        result.includes("You") ? humanScore++
-        : result.includes("Computer") ? compScore++
-        : round--;
-
-        alert(
-            `${result}
-            
-            You: ${humanScore}
-            CPU: ${compScore}`
-        );
-    }
-
-    alert(
-        humanScore == compScore ? "The game tied! Nobody wins."
-        : humanScore > compScore ? "You win the game!"
-        : "Computer wins the game!"
-    );
-}
-
-// DOM EDITION
-
-
-const buttonMoves = document.querySelectorAll('button.move');
-
-buttonMoves.forEach((move) => {
-    move.addEventListener('click', () => {
-
-        documentResult = document.querySelector('#result')
-        result = playRound(move.textContent, getComputerMove())
-        
-        documentResult.textContent = result;
-        
-
-        
-        console.log('Human chose: ' + move.textContent);
-    })
-})
-
-
-
-
-// game(5);
-
-
-
+    if (human == 5) announceWinner("Human");
+    if (compu == 5) announceWinner("Computer");
+  });
+}); 

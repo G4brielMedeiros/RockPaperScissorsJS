@@ -1,88 +1,82 @@
 body {
-    display: flex;
-    flex-direction: column;
-    min-height: 100vh;
-    align-items: center;
-    margin: 0;
-    font-family: Arial, Helvetica, sans-serif;
-
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  align-items: center;
+  margin: 0;
+  font-family: Arial, Helvetica, sans-serif;
 }
 
-
-.top, .footer {
-    background-color: #1F2937;
-    color: white;
-    width: 100%;
+.top,
+.footer {
+  background-color: #1f2937;
+  color: white;
+  width: 100%;
 }
 
 .header {
-    display: flex;
-    align-items: center;
-    justify-content: space-around;
-    flex-wrap: wrap;
-    gap: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  flex-wrap: wrap;
+  gap: 10px;
 }
 
 .header-logo {
-    font-size: 24px;
-    font-weight: bolder;
-    color: #F9FAF8;
-    text-align: center;
+  font-size: 24px;
+  font-weight: bolder;
+  color: #f9faf8;
+  text-align: center;
 }
 
 .header-link {
-    font-size: 18px;
-    color: #E5E7EB;
+  font-size: 18px;
+  color: #e5e7eb;
 }
 
-
-
 .header-list {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 20px;
-    justify-content: center;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  justify-content: center;
 }
 
 ul {
-    padding: 0;
+  padding: 0;
 }
 li {
-    list-style-type: none;
-    
+  list-style-type: none;
 }
 
 a {
-    text-decoration: none;
-    color: #F9FAF8;
-    text-align: center;
+  text-decoration: none;
+  color: #f9faf8;
+  text-align: center;
 }
 
-
 .content {
-    flex: 1 0 auto;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    text-align: center;
+  flex: 1 0 auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  text-align: center;
 }
 
 .moves {
-    display: flex;
-    justify-content: center;
-    flex-wrap: wrap;
-    gap: 40px;
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 40px;
 }
 
 #result {
-    text-align: center;
+  text-align: center;
 }
 
-
 .footer {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-around;
-    align-content: center;
-    padding: 20px 0;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  align-content: center;
+  padding: 20px 0;
 }
