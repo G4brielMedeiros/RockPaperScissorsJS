@@ -3,6 +3,6 @@
 ### Play Rock Paper Scissors against your browser! 
 
 
-#### NEW: Basic GUI is now ready! You can actually have fun now, goodbye alerts and prompts!
+#### NEW: Improved GUI is now ready! Project is basically done!
 
-TODO: Add score count and announcing winner after 5 rounds.
+
