@@ -14,7 +14,7 @@ let ScoreDOM    = document.querySelector("#score");
 let WinnerDOM   = document.createElement("p");
 let rematchDOM  = document.createElement("button");
 
-function getComputerMove() { return moves[Math.floor(Math.random() * 3)]; }
+const getComputerMove = () => moves[Math.floor(Math.random() * 3)]; 
 
 function playRound(human, compu) {
   let message = `${human} vs. ${compu}...`;
